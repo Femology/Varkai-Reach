@@ -1,0 +1,22 @@
+{
+  "jobs": [
+    {
+      "id": "open-source-issues",
+      "channel": "github",
+      "query": "accessibility screen reader bug",
+      "limit": 5
+    },
+    {
+      "id": "founder-signals",
+      "channel": "reddit",
+      "query": "software accessibility complaints",
+      "limit": 5
+    },
+    {
+      "id": "technology-news",
+      "channel": "web",
+      "query": "open source accessibility research",
+      "limit": 5
+    }
+  ]
+}
