@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "varkai-reach": {
+      "command": "/ABSOLUTE/PATH/TO/.venv/bin/python",
+      "args": ["-m", "varkai_reach", "--transport", "stdio"]
+    }
+  }
+}
