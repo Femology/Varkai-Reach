@@ -51,16 +51,16 @@ def create_server(gateway: ReachGateway | None = None, store: ResearchStore | No
         "Do not repeat login attempts when a platform reports a block or rate limit."
     ))
 
-    @mcp.tool()
-    def reach_channels() -> dict:
+    @mcp.tool(structured_output=True)
+    def reach_channels() -> dict[str, Any]:
         """List available Agent Reach platforms and supported actions."""
         try:
             return {"ok": True, "channels": reach.channels()}
         except ReachGatewayError as exc:
             return {"ok": False, "error": str(exc)}
 
-    @mcp.tool()
-    def reach_search(channel: str, query: str, limit: int = 5, save: bool = False) -> dict:
+    @mcp.tool(structured_output=True)
+    def reach_search(channel: str, query: str, limit: int = 5, save: bool = False) -> dict[str, Any]:
         """Search one supported platform; optionally save source-backed findings."""
         try:
             outcome = reach.search(channel, query, limit)
@@ -70,8 +70,8 @@ def create_server(gateway: ReachGateway | None = None, store: ResearchStore | No
         except (ReachGatewayError, ValueError) as exc:
             return {"ok": False, "error": str(exc)}
 
-    @mcp.tool()
-    def reach_read(url: str, save: bool = False) -> dict:
+    @mcp.tool(structured_output=True)
+    def reach_read(url: str, save: bool = False) -> dict[str, Any]:
         """Read a public HTTP(S) URL using the matching Agent Reach channel."""
         try:
             outcome = reach.read(url)
@@ -81,8 +81,8 @@ def create_server(gateway: ReachGateway | None = None, store: ResearchStore | No
         except (ReachGatewayError, ValueError) as exc:
             return {"ok": False, "error": str(exc)}
 
-    @mcp.tool()
-    def reach_findings(query: str, limit: int = 20) -> dict:
+    @mcp.tool(structured_output=True)
+    def reach_findings(query: str, limit: int = 20) -> dict[str, Any]:
         """Find previously saved research with sources and collection timestamps."""
         try:
             return {"ok": True, "items": memory.find(query, limit)}
