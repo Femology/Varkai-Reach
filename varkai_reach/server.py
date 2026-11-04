@@ -104,8 +104,16 @@ def create_http_app(server, token: str, public_host: str):
     async def health(_request):
         return JSONResponse({"ok": True, "name": "varkai-reach"})
 
+    from mcp.server.transport_security import TransportSecuritySettings
+
+    # Passing host= alone disables SDK protection rather than allowlisting it.
+    # Reject unexpected Host and Origin values even behind an HTTPS proxy.
+    security = TransportSecuritySettings(
+        allowed_hosts=[public_host, f"{public_host}:*"],
+        allowed_origins=["https://chatgpt.com", "https://claude.ai"],
+    )
     mcp_app = server.streamable_http_app(
-        host=public_host, stateless_http=True, json_response=True,
+        transport_security=security, stateless_http=True, json_response=True,
         max_request_body_size=131072,
     )
     app = Starlette(routes=[Route("/healthz", health), Mount("/", app=mcp_app)],
@@ -127,11 +135,14 @@ def main(argv: list[str] | None = None) -> None:
         parser.error("Set VARKAI_REACH_TOKEN (24+ characters) before HTTP deployment")
     if not 1 <= args.port <= 65535:
         parser.error("port must be between 1 and 65535")
-    public_host = os.environ.get("VARKAI_REACH_PUBLIC_HOST", "")
+    public_host = os.environ.get("VARKAI_REACH_PUBLIC_HOST") or os.environ.get("RENDER_EXTERNAL_HOSTNAME", "")
     if not public_host:
         parser.error("Set VARKAI_REACH_PUBLIC_HOST to the external hostname")
-    if "/" in public_host or "://" in public_host:
-        parser.error("VARKAI_REACH_PUBLIC_HOST must be a hostname, not a URL")
+    import re
+    if (len(public_host) > 253 or not re.fullmatch(
+        r"[A-Za-z0-9](?:[A-Za-z0-9.-]*[A-Za-z0-9])?", public_host
+    ) or ".." in public_host):
+        parser.error("VARKAI_REACH_PUBLIC_HOST must be a valid hostname, not a URL")
 
     import uvicorn
     app = create_http_app(create_server(), token, public_host)
