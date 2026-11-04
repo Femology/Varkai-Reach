@@ -26,4 +26,4 @@ jobs:
         with:
           python-version: ${{ matrix.python-version }}
       - run: python -m pip install -e '.[dev,integrations]'
-      - run: python -m pytest -q tests/test_varkai_gateway.py tests/test_varkai_store.py tests/test_varkai_auth.py tests/test_varkai_mcp_integration.py tests/test_varkai_http.py
+      - run: python -m pytest -q tests/test_varkai_gateway.py tests/test_varkai_store.py tests/test_varkai_auth.py tests/test_varkai_mcp_integration.py tests/test_varkai_http.py tests/test_varkai_monitor.py
