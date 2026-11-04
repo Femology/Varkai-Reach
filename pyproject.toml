@@ -42,6 +42,7 @@ integrations = [
 ]
 dev = [
     "pytest>=8.0",
+    "httpx>=0.27,<1",
     "ruff>=0.8",
     "mypy>=1.12",
     "types-requests>=2.32",
