@@ -80,6 +80,8 @@ def run_plan(plan: Any, gateway: ReachGateway, store: ResearchStore) -> dict[str
         items = response.get("items") or []
         if not isinstance(items, list):
             items = []
+        # Some upstream channels have no native --limit parameter.
+        items = items[:job["limit"]]
         found = [item for item in items if isinstance(item, dict) and isinstance(item.get("url"), str)
                  and item["url"].startswith(("https://", "http://"))]
         known = store.known_urls(channel, [item["url"] for item in found])
