@@ -1,0 +1,29 @@
+name: Varkai Reach MCP tests
+on:
+  push:
+    paths:
+      - 'varkai_reach/**'
+      - 'tests/test_varkai_*.py'
+      - 'pyproject.toml'
+      - '.github/workflows/varkai-reach.yml'
+  pull_request:
+    paths:
+      - 'varkai_reach/**'
+      - 'tests/test_varkai_*.py'
+      - 'pyproject.toml'
+      - '.github/workflows/varkai-reach.yml'
+permissions:
+  contents: read
+jobs:
+  unit:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ['3.10', '3.12']
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+      - run: python -m pip install -e '.[dev,integrations]'
+      - run: python -m pytest -q tests/test_varkai_gateway.py tests/test_varkai_store.py tests/test_varkai_auth.py
