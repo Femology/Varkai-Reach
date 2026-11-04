@@ -1,0 +1,43 @@
+{
+  "interface": {
+    "capabilities": [
+      "Read"
+    ],
+    "category": "Developer Tools",
+    "defaultPrompt": [
+      "Research recent public discussions about an industry problem across available sources, with citations and evidence gaps.",
+      "Collect source-backed signals about accessibility problems and group them into startup opportunities.",
+      "Help me design a monitored-source plan and distinguish new findings from duplicates."
+    ],
+    "developerName": "Pier",
+    "displayName": "Varkai Reach",
+    "longDescription": "Research public web pages, repositories, videos and discussions with source-backed analysis. Organize findings, validate startup problems and design monitoring plans. Live Agent Reach collection requires a separately configured MCP backend; installing these skills alone does not activate the remote server.",
+    "shortDescription": "Research web and media with evidence",
+    "websiteURL": "https://github.com/Femology/Varkai-Reach"
+  },
+  "extensions": {
+    "com.openai": {
+      "onboardingSkill": "./skills/setup/SKILL.md"
+    }
+  },
+  "name": "varkai-reach",
+  "version": "0.1.0",
+  "description": "Evidence-first web and media research, source verification, and monitoring workflows for AI agents.",
+  "author": {
+    "name": "Pier",
+    "email": "pier86596@gmail.com",
+    "url": "https://github.com/Femology/Varkai-Reach"
+  },
+  "keywords": [
+    "research",
+    "media-intelligence",
+    "source-verification",
+    "agent-reach",
+    "monitoring",
+    "mcp"
+  ],
+  "homepage": "https://github.com/Femology/Varkai-Reach",
+  "repository": "https://github.com/Femology/Varkai-Reach",
+  "license": "MIT",
+  "skills": "./skills"
+}
