@@ -52,6 +52,7 @@ dev = [
 [project.scripts]
 agent-reach = "agent_reach.cli:main"
 varkai-reach-mcp = "varkai_reach.server:main"
+varkai-reach-monitor = "varkai_reach.monitor:main"
 
 [project.urls]
 Homepage = "https://github.com/Panniantong/agent-reach"
