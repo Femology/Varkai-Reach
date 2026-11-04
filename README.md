@@ -254,3 +254,5 @@ This fork adds a **read-only, cross-agent MCP bridge** while preserving the orig
 **Start here:** [Varkai Reach installation, tools, security and roadmap](docs/VARKAI_REACH.md).
 
 The bridge is **alpha**, not a deployed ChatGPT directory plugin. Live social-platform access depends on each platform's login requirements and availability; hosted ChatGPT OAuth and production multi-user access are future milestones.
+
+**Source monitoring:** [one-shot collection runner and scheduled-job guidance](docs/MONITORING.md) (runs only when invoked; requires a persistent host and user-managed scheduler).
