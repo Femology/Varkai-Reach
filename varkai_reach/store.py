@@ -51,6 +51,22 @@ class ResearchStore:
                 saved += 1
         return saved
 
+
+    def known_urls(self, channel: str, urls: list[str]) -> set[str]:
+        """Exact deduplication without broad text-search false positives."""
+        if not urls:
+            return set()
+        unique = list(dict.fromkeys(url for url in urls[:250] if isinstance(url, str)))
+        if not unique:
+            return set()
+        placeholders = ",".join("?" for _ in unique)
+        with self._connect() as db:
+            rows = db.execute(
+                f"SELECT url FROM findings WHERE channel = ? AND url IN ({placeholders})",
+                [channel, *unique],
+            ).fetchall()
+        return {row["url"] for row in rows}
+
     def find(self, query: str, limit: int = 20) -> list[dict[str, Any]]:
         if not isinstance(query, str) or not 1 <= len(query.strip()) <= 400:
             raise ValueError("Query must be between 1 and 400 characters")
