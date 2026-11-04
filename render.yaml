@@ -1,0 +1,20 @@
+# Optional single-user evaluation deployment.
+# This blueprint does not deploy until explicitly launched on Render.
+# Free services sleep when idle; SQLite findings are not persistent.
+services:
+  - type: web
+    name: varkai-reach-mcp
+    runtime: docker
+    plan: free
+    region: oregon
+    dockerfilePath: ./Dockerfile
+    autoDeploy: false
+    healthCheckPath: /healthz
+    envVars:
+      - key: VARKAI_REACH_TOKEN
+        generateValue: true
+      - key: VARKAI_REACH_PUBLIC_HOST
+        fromService:
+          name: varkai-reach-mcp
+          type: web
+          envVarKey: RENDER_EXTERNAL_HOSTNAME
