@@ -1,0 +1,19 @@
+{
+  "mcpServers": {
+    "varkai-reach": {
+      "command": "uv",
+      "args": [
+        "run",
+        "--project",
+        "${CLAUDE_PLUGIN_ROOT}",
+        "--extra",
+        "integrations",
+        "python",
+        "-m",
+        "varkai_reach",
+        "--transport",
+        "stdio"
+      ]
+    }
+  }
+}
