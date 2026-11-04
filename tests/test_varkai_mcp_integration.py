@@ -4,6 +4,9 @@ These tests make real MCP initialize / tools-list / tools-call requests, rather
 than only unit-testing Python functions. Network/platform I/O remains mocked.
 """
 import pytest
+
+# Agent Reach's original CI only installs the core extras, not the optional MCP SDK.
+pytest.importorskip("mcp", reason="Install the optional [integrations] extra to run MCP wire tests")
 from mcp import Client
 
 from varkai_reach.server import create_server
