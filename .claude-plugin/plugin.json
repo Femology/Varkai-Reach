@@ -1,0 +1,9 @@
+{
+  "name": "varkai-reach",
+  "version": "0.1.0",
+  "description": "Read-only, source-backed global web and media research through Agent Reach with shared MCP research memory.",
+  "author": {
+    "name": "Varkai Reach contributors"
+  },
+  "homepage": "https://github.com/Femology/Varkai-Reach"
+}
